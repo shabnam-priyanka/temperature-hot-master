@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Temperature Hot</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background: url(images/bg-image.jpg) no-repeat;
+            background-size: cover;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form class="col-md-6 m-auto py-5">
+            <div class="input-group mb-3">
+                <input type="text" id ='input-box' class="form-control" placeholder="Enter a location for Weather ...">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-danger">Search</button>
+                </div>
+            </div>
+        </form>
+        <div class="weather-status text-white text-center">
+            <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
+            <h1 id="city">Dhaka</h1>
+            <h3><span>38.06</span>&deg;C</h3>
+            <h1 class="clouds">Clouds</h1>
+        </div>
+    </div>
+        
+
+        <script>
+            let button = document.querySelector('button')
+           let inputBox = document.querySelector('#input-box')
+           let city = document.querySelector('#city')
+           let cloudy = document.querySelector('.clouds')
+           let tem = document.querySelector('span')
+
+            button.addEventListener('click', function(){
+            fetch('https://api.openweathermap.org/data/2.5/weather?q=' + inputBox.value + '&appid=80771536fd9731d7aab9819bb7f3ac05')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data) 
+            })
+
+            let cityName = data['name'];
+            let temperature = data['main']['temp'];
+            let desc = data['weather'][0]['description'];
+
+            city.innerHTML = cityName; 
+            tem.innerHTML = temperature;
+            cloudy.innerHTML = desc;
+            // .catch(err => alert('wrong city name!'))
+
+            })
+
+
+            
+            
+            
+            
+            
+            
+            // const searchBox = document.getElementById('search-location2').value;
+            // searchBox.addEventListener('click', function()
+
+            //     let appId = "80771536fd9731d7aab9819bb7f3ac05",
+            //  let units  = "imperial";
+            //  let searchMethod = "city";
+
+            // function searchWeather(searchTerm){
+            //     fetch( `https://api.openweathermap.org/data/2.5/weather?${searchMethod}=${searchTerm}&APPID=${appId}&units=${units}`)
+            //     .then(result => {
+            //         return result.json();
+            //     }).then(result => {
+            //         init(result);
+            //     })
+
+            // }
+
+            // https://www.youtube.com/watch?v=GXrDEA3SIOQ
+
+            // https://www.youtube.com/watch?v=ZPG2wGNj6J4
+
+            // function init(resultFromServer){
+            //     console.log(resultFromServer);
+            // }
+
+            // document.getElementById('search-location').addeventlistener('click', () => {
+            //     let searchTerm = document.getElementById('search-location2').value;
+            //     if(searchTerm)
+            //     searchWeather(searchTerm);
+            // })
+            
+        </script>
+</body>
+
+</html>
